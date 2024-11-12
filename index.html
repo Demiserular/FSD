@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual DOM-like Example</title>
+</head>
+<body>
+  <div id="app">
+    <button onclick="addParagraph()">Add Paragraph</button>
+    <div id="content"></div>
+  </div>
+
+  <script>
+    const virtualDOM = {
+      paragraphs: []
+    };
+
+    function render() {
+      const contentDiv = document.getElementById("content");
+      contentDiv.innerHTML = ""; 
+
+      virtualDOM.paragraphs.forEach((text, index) => {
+        const p = document.createElement("p");
+        p.textContent = `${index + 1}: ${text}`;
+        contentDiv.appendChild(p);
+      });
+    }
+
+    function addParagraph() {
+      const newText = "This is a new paragraph";
+      virtualDOM.paragraphs.push(newText);
+      render();
+    }
+  </script>
+</body>
+</html>
